@@ -25,7 +25,7 @@ public class TestController {
 	public ApiResult login(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		if (username.equals("admin") || username.equals("user")) {
 			if (password.equals("123456")) {
-				String token = tokenManager.create();
+				String token = tokenManager.create(120, 3600);
 				Cache c = tokenManager.getCache();
 				c.put("name", username);
 				return new ApiResult(200, null, token);
